@@ -1,0 +1,62 @@
+name: Bug
+description: Utilisez ce modèle pour signaler un bug qui nécessite une correction.
+labels: ["bug"]
+projects: ["ClubCedille/16"]
+body:
+
+  - type: textarea
+    id: description-bug
+    attributes:
+      label: Décrire le bug
+      description: "Une description claire et concise de ce qu'est le problème."
+      placeholder: "Ex. Lorsque je clique sur tel bouton, rien ne se passe."
+
+  - type: textarea
+    id: reproduction-bug
+    attributes:
+      label: "À reproduire"
+      description: "Étapes pour reproduire le comportement."
+      value: |
+        1. Allez à '...'
+        2. Cliquez sur '....'
+        3. Faites défiler jusqu'à '....'
+        4. Voir l'erreur
+      render: markdown
+
+  - type: textarea
+    id: comportement-attendu-bug
+    attributes:
+      label: "Comportement attendu sans le bug"
+      description: "Une description claire et concise de ce que vous vous attendiez à ce qu'il se produise."
+
+  - type: textarea
+    id: captures-ecran
+    attributes:
+      label: "Captures d'écran"
+      description: "Si applicable, ajoutez des captures d'écran pour aider à expliquer votre problème."
+
+  - type: dropdown
+    id: ordinateur-os
+    attributes:
+      label: Système d'exploitation
+      description: Quelle système d'exploitation utilisez-vous?
+      options:
+        - Windows
+        - MacOS
+        - Linux
+        - N/A
+      default: 0
+
+  - type: dropdown
+    id: navigateurs-bug
+    attributes:
+      label: Navigateur utilisé?
+      description: "Quel navigateur avez-vous utilisé pour reproduire le bug?"
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+        - Brave
+        - N/A
+      default: 0

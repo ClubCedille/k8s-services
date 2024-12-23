@@ -1,0 +1,12 @@
+name: k8s-template integration workflow
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  kubernetes-repo-standards:
+    uses:
+      clubcedille/cedille-workflows/.github/workflows/kubernetes-repo-standards.yml@master

@@ -1,0 +1,34 @@
+name: Feature
+description: Ajouter une nouvelle fonctionnalité ou amélioration dans le projet
+labels: ["enhancement"]
+projects: ["ClubCedille/14"]
+body:
+
+  - type: textarea
+    id: description-feature
+    attributes:
+      label: "Décrire le feature"
+      description: "Une description claire et concise de la nouvelle demande."
+      placeholder: "Ex. Ajouter une nouvelle fonctionnalité pour..."
+
+  - type: dropdown
+    id: options-feature
+    attributes:
+      label: Choisir une option de feature
+      description: "Veuillez sélectionner une option des deux différentes fonctionnalités"
+      options:
+        - Nouvelle fonctionnalité
+        - Amélioration
+        - Ajout de tests
+      default: 0
+
+  - type: textarea
+    id: criteres-acceptation
+    attributes:
+      label: "Critères d'acceptation"
+      description: "Liste des critères d'acceptation pour cette nouvelle fonctionnalité."
+      value: |
+        1. ...
+        2. ...
+        3. ...
+      render: markdown
