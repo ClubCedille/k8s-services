@@ -1,0 +1,26 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: authentik
+  namespace: authentik
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+spec:
+  virtualhost:
+    fqdn: authentik.svc.cedille.club
+    tls:
+      secretName: authentik-tls
+  routes:
+  - conditions:
+    - header:
+        contains: application/grpc
+        name: Content-Type
+    - prefix: /websocket
+    enableWebsockets: true
+    services:
+    - name: authentik-server
+      port: 80
+      protocol: h2c
+  - services:
+    - name: authentik-server
+      port: 80

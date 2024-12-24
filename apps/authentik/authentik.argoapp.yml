@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: services-authentik
+  namespace: argocd
+spec:
+  destination:
+    namespace: authentik
+    server: https://cedille.kubernetes.omni.siderolabs.io?cluster=k8s-services
+  project: k8s-services
+  source:
+    path: apps/authentik
+    repoURL: https://github.com/ClubCedille/k8s-services.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

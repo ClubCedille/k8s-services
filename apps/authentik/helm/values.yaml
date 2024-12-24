@@ -1,0 +1,35 @@
+authentik:
+  secret_key: "PleaseGenerateA50CharKey"
+  # This sends anonymous usage-data, stack traces on errors and
+  # performance data to authentik.error-reporting.a7k.io, and is fully opt-in
+  error_reporting:
+    enabled: false
+  postgresql:
+    password: "ThisIsNotASecurePassword"
+  bootstrap_token: "test"
+  bootstrap_password: "test"
+
+server:
+  ingress:
+    enabled: true
+    hosts:
+      - authentik.mgmt.cedille.club
+
+defaultStorageClass: cephfs
+global:
+  storageClass: cephfs
+  namespace: "authentik"
+
+postgresql:
+  enabled: true
+  auth:
+    password: "ThisIsNotASecurePassword"
+  persistence:
+    enabled: true
+    storageClass: cephfs
+
+redis:
+  enabled: true
+  persistence:
+    enabled: true
+    storageClass: cephfs
