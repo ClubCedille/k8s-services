@@ -3,8 +3,6 @@ kind: Kustomization
 metadata:
   name: authentik
   namespace: authentik
-resources:
-  - helm/values
 helmCharts:
   - name: authentik
     version: "2024.10.2"  # Specify the version of the Authentik chart
