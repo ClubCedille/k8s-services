@@ -11,7 +11,7 @@ authentik:
 
 server:
   ingress:
-    enabled: true
+    enabled: false
     hosts:
       - authentik.svc.cedille.club
 

@@ -4,7 +4,7 @@ metadata:
   name: authentik
   namespace: authentik
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   virtualhost:
     fqdn: authentik.svc.cedille.club
