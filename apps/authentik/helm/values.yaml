@@ -13,7 +13,7 @@ server:
   ingress:
     enabled: true
     hosts:
-      - authentik.mgmt.cedille.club
+      - authentik.svc.cedille.club
 
 defaultStorageClass: cephfs
 global:
