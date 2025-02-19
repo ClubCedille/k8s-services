@@ -5,7 +5,7 @@ metadata:
   namespace: authentik
 resources:
   - resources/certificate.yaml
-  - resources/ingress.yaml
+  - resources/httpproxy.yaml
 helmCharts:
   - name: authentik
     version: "2024.10.2"  # Specify the version of the Authentik chart
