@@ -1,0 +1,51 @@
+replicaCount: 1
+
+matomoUsername: user
+
+matomoPassword: ""
+
+matomoEmail: user@example.com
+
+matomoWebsiteName: example
+
+matomoWebsiteHost: https://example.org
+
+allowEmptyPassword: true
+
+containerPorts:
+  http: 8080
+  https: 8443
+
+persistence:
+  enabled: true
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+  dataSource: {}
+  existingClaim: ""
+  hostPath: ""
+  annotations: {}
+  selector: {}
+
+ingress:
+  enabled: false
+
+mariadb:
+  enabled: true
+  architecture: standalone
+  auth:
+    rootPassword: ""
+    database: bitnami_matomo
+    username: bn_matomo
+    password: ""
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 8Gi
+      hostPath: ""
+      existingClaim: ""
+    resourcesPreset: "micro"
