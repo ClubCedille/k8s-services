@@ -34,12 +34,14 @@ spec:
     - name: authentik-server
       port: 80
       protocol: h2c
-  - requestHeadersPolicy:
+  - conditions:
+    - prefix: /
+    requestHeadersPolicy:
       set:
         - name: X-Forwarded-Proto
           value: https
         - name: X-Forwarded-For
-          value: "%DOWNSTREAM_REMOTE_ADDRESS%"
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: Host
           value: "%REQ(:authority)%"
     services:
