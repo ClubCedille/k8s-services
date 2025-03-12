@@ -8,8 +8,8 @@ resources:
   - resources/httpproxy.yaml
 helmCharts:
   - name: authentik
-    version: "2024.10.2"  # Specify the version of the Authentik chart
-    repo: "https://charts.goauthentik.io"  # Repository for the Authentik chart
-    releaseName: "authentik"  # Release name for your Helm deployment
-    namespace: authentik  # Authentik namespace
-    valuesFile: "helm/values.yaml"  # Reference to your `values.yaml` file
+    version: "2024.10.2"
+    repo: "https://charts.goauthentik.io"
+    releaseName: "authentik"
+    namespace: authentik
+    valuesFile: "helm/values.yaml"

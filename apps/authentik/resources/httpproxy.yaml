@@ -10,6 +10,7 @@ spec:
     fqdn: authentik.svc.cedille.club
     tls:
       secretName: authentik-tls
+      minimumProtocolVersion: "1.3"
   routes:
   - conditions:
     - header:
@@ -17,10 +18,30 @@ spec:
         name: Content-Type
     - prefix: /websocket
     enableWebsockets: true
+    requestHeadersPolicy:
+      set:
+        - name: X-Forwarded-Proto
+          value: https
+        - name: X-Forwarded-For
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+        - name: Host
+          value: "%REQ(:authority)%"
+        - name: Connection
+          value: upgrade
+        - name: Upgrade
+          value: websocket
     services:
     - name: authentik-server
       port: 80
       protocol: h2c
-  - services:
+  - requestHeadersPolicy:
+      set:
+        - name: X-Forwarded-Proto
+          value: https
+        - name: X-Forwarded-For
+          value: "%DOWNSTREAM_REMOTE_ADDRESS%"
+        - name: Host
+          value: "%REQ(:authority)%"
+    services:
     - name: authentik-server
       port: 80
