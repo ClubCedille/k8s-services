@@ -18,9 +18,9 @@ spec:
     - prefix: /websocket
     enableWebsockets: true
     services:
-    - name: matomo-server
+    - name: matomo
       port: 80
       protocol: h2c
   - services:
-    - name: matomo-server
+    - name: matomo
       port: 80

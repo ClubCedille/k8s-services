@@ -1,32 +1,11 @@
 replicaCount: 1
 
-matomoUsername: user
-
-matomoPassword: ""
-
-matomoEmail: user@example.com
-
-matomoWebsiteName: example
-
-matomoWebsiteHost: https://example.org
-
-allowEmptyPassword: true
-
-containerPorts:
-  http: 8080
-  https: 8443
-
 persistence:
   enabled: true
-  storageClass: ""
+  storageClass: "cephfs"
   accessModes:
     - ReadWriteOnce
   size: 8Gi
-  dataSource: {}
-  existingClaim: ""
-  hostPath: ""
-  annotations: {}
-  selector: {}
 
 ingress:
   enabled: false
@@ -35,17 +14,29 @@ mariadb:
   enabled: true
   architecture: standalone
   auth:
-    rootPassword: ""
+    rootPassword: "root"
     database: bitnami_matomo
     username: bn_matomo
-    password: ""
+    password: "root"
   primary:
     persistence:
       enabled: true
-      storageClass: ""
+      storageClass: "cephfs"
       accessModes:
         - ReadWriteOnce
       size: 8Gi
-      hostPath: ""
-      existingClaim: ""
+    storageClass: "cephfs"
     resourcesPreset: "micro"
+
+matomo:
+  persistence:
+    enabled: true
+    storageClass: "cephfs"
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+  plugins:
+    - "LoginOIDC"
+  domain: "matomo.svc.cedille.club"
+  service:
+    type: ClusterIP
