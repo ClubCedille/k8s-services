@@ -21,8 +21,8 @@ spec:
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: Connection
           value: upgrade
-        # - name: Upgrade
-        #   value: websocket
+        - name: Upgrade
+          value: websocket
         - name: X-Forwarded-Proto
           value: "%PROTOCOL%"
         - name: X-Forwarded-Ip
