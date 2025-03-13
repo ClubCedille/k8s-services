@@ -16,7 +16,7 @@ spec:
     - header:
         contains: application/grpc
         name: Content-Type
-    - prefix: /websocket
+    - prefix: /ws
     enableWebsockets: true
     requestHeadersPolicy:
       set:
@@ -34,12 +34,6 @@ spec:
       protocol: h2c
   - conditions:
     - prefix: /
-    requestHeadersPolicy:
-      set:
-        - name: X-Forwarded-Proto
-          value: https
-        - name: X-Forwarded-For
-          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
     services:
     - name: authentik-server
       port: 80
