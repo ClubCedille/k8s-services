@@ -14,7 +14,7 @@ spec:
   routes:
   - conditions:
     - prefix: /
-    enableWebsockets: true
+    # enableWebsockets: true
     requestHeadersPolicy:
       set:
         - name: X-Forwarded-For
