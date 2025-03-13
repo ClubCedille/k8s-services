@@ -13,14 +13,24 @@ spec:
       minimumProtocolVersion: "1.3"
   routes:
   - conditions:
+    - header:
+        contains: application/grpc
+        name: Content-Type
     - prefix: /ws
     enableWebsockets: true
     requestHeadersPolicy:
       set:
-        - name: Upgrade
-          value: "websocket"
+
+        - name: X-Forwarded-For
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+        - name: X-Real-IP
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+        - name: Host
+          value: "authentik.svc.cedille.club"
         - name: Connection
           value: "upgrade"
+        - name: Upgrade
+          value: "websocket"
         - name: X-Forwarded-Proto
           value: "https"
     services:
@@ -29,15 +39,20 @@ spec:
       protocol: h2c
   - conditions:
     - prefix: /
-    enableWebsockets: true
     requestHeadersPolicy:
       set:
-        - name: Upgrade
-          value: "websocket"
+        - name: X-Forwarded-For
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+        - name: X-Real-IP
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+        # - name: Host
+        #   value: "authentik.svc.cedille.club"
         - name: Connection
           value: "upgrade"
-        # - name: X-Forwarded-Proto
-        #   value: "https"
+        - name: Upgrade
+          value: "websocket"
+        - name: X-Forwarded-Proto
+          value: "https"
     services:
     - name: authentik-server
       port: 80
