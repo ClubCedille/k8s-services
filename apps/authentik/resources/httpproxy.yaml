@@ -18,19 +18,11 @@ spec:
     requestHeadersPolicy:
       set:
         - name: X-Forwarded-For
-          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        - name: Connection
-          value: "Upgrade"
-        # - name: Upgrade
-        #   value: "WebSocket"
+          value: "%REQ(X-Forwarded-For)%"
         - name: X-Forwarded-Proto
-          value: "%PROTOCOL%"
+          value: "%REQ(:scheme)%"
         - name: Host
           value: "%REQ(:AUTHORITY)%"
-    cookieRewritePolicies:
-      - name: authentik_session
-        secure: true
-        sameSite: "None"
     services:
     - name: authentik-server
       port: 80
