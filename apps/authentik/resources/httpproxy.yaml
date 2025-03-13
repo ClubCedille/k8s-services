@@ -36,8 +36,8 @@ spec:
           value: "websocket"
         - name: Connection
           value: "upgrade"
-        - name: X-Forwarded-Proto
-          value: "https"
+        # - name: X-Forwarded-Proto
+        #   value: "https"
     services:
     - name: authentik-server
       port: 80
