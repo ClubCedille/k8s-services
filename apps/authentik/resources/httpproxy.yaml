@@ -19,16 +19,16 @@ spec:
       set:
         - name: X-Forwarded-For
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        - name: Connection
-          value: Upgrade
-        - name: Upgrade
-          value: WebSocket
+        # - name: Connection
+        #   value: Upgrade
+        # - name: Upgrade
+        #   value: WebSocket
         - name: X-Forwarded-Proto
-          value: "%REQ(:scheme)%"
+          value: "%PROTOCOL%"
         - name: X-Forwarded-Ip
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: X-Forwarded-Host
-          value: "%REQ(Host)%"
+          value: "%REQ(:AUTHORITY)%"
     services:
     - name: authentik-server
       port: 80
