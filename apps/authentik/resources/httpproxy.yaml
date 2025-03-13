@@ -19,15 +19,17 @@ spec:
       set:
         - name: X-Forwarded-For
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        # - name: Connection
-        #   value: Upgrade
-        # - name: Upgrade
-        #   value: WebSocket
+        - name: Connection
+          value: "Upgrade"
+        - name: Upgrade
+          value: "WebSocket"
         - name: X-Forwarded-Proto
-          value: "%PROTOCOL%"
+          value: "https"
         - name: X-Forwarded-Ip
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: X-Forwarded-Host
+          value: "%REQ(:AUTHORITY)%"
+        - name: Host
           value: "%REQ(:AUTHORITY)%"
     services:
     - name: authentik-server
