@@ -45,8 +45,8 @@ spec:
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: X-Real-IP
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        - name: Host
-          value: "authentik.svc.cedille.club"
+        # - name: Host
+        #   value: "authentik.svc.cedille.club"
         - name: Connection
           value: "upgrade"
         - name: Upgrade
