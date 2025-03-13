@@ -20,39 +20,18 @@ spec:
     enableWebsockets: true
     requestHeadersPolicy:
       set:
-
         - name: X-Forwarded-For
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        - name: X-Real-IP
-          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        - name: Host
-          value: "authentik.svc.cedille.club"
         - name: Connection
-          value: "upgrade"
+          value: upgrade
         - name: Upgrade
-          value: "websocket"
-        - name: X-Forwarded-Proto
-          value: "https"
+          value: websocket
     services:
     - name: authentik-server
       port: 80
       protocol: h2c
   - conditions:
     - prefix: /
-    requestHeadersPolicy:
-      set:
-        - name: X-Forwarded-For
-          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        - name: X-Real-IP
-          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        # - name: Host
-        #   value: "authentik.svc.cedille.club"
-        - name: Connection
-          value: "upgrade"
-        - name: Upgrade
-          value: "websocket"
-        - name: X-Forwarded-Proto
-          value: "https"
     services:
     - name: authentik-server
       port: 80
