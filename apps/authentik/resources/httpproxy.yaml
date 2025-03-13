@@ -19,8 +19,8 @@ spec:
       set:
         - name: X-Forwarded-For
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        # - name: Connection
-        #   value: upgrade
+        - name: Connection
+          value: upgrade
         # - name: Upgrade
         #   value: websocket
         - name: X-Forwarded-Proto
@@ -31,4 +31,4 @@ spec:
         #   value: "%REQ(Host)%"
     services:
     - name: authentik-server
-      port: 443
+      port: 80
