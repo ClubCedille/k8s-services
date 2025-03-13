@@ -32,6 +32,16 @@ spec:
       protocol: h2c
   - conditions:
     - prefix: /
+    requestHeadersPolicy:
+      set:
+        - name: X-Forwarded-For
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+        - name: X-Forwarded-Proto
+          value: "%PROTOCOL%"
+        - name: X-Forwarded-Ip
+          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
+        - name: X-Forwarded-Host
+          value: "%REQ(Host)%"
     services:
     - name: authentik-server
       port: 80
