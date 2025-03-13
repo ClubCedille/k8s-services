@@ -21,8 +21,8 @@ spec:
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: X-Forwarded-Proto
           value: "%PROTOCOL%"
-        - name: X-Forwarded-Host
-          value: "%HOST%"
+        # - name: X-Forwarded-Host
+        #   value: "%HOST%"
         - name: Connection
           value: upgrade
         - name: Upgrade
