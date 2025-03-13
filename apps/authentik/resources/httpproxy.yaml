@@ -25,12 +25,17 @@ spec:
           value: "WebSocket"
         - name: X-Forwarded-Proto
           value: "https"
-        - name: X-Forwarded-Ip
-          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: X-Forwarded-Host
           value: "%REQ(:AUTHORITY)%"
         - name: Host
           value: "%REQ(:AUTHORITY)%"
+        - name: X-Scheme
+          value: "https"
+    cookieRewritePolicies:
+      - name: authentik_session
+        secure: true
+        sameSite: "None"
     services:
     - name: authentik-server
       port: 80
+      protocol: tls
