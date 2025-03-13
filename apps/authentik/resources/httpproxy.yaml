@@ -27,8 +27,8 @@ spec:
           value: "%PROTOCOL%"
         - name: X-Forwarded-Ip
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
-        - name: X-Forwarded-Host
-          value: "%REQ(Host)%"
+        # - name: X-Forwarded-Host
+        #   value: "%REQ(Host)%"
     services:
     - name: authentik-server
       port: 80
