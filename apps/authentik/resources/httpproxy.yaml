@@ -20,8 +20,6 @@ spec:
     enableWebsockets: true
     requestHeadersPolicy:
       set:
-        - name: X-Forwarded-For
-          value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         - name: Host
           value: "%REQ(:authority)%"
         - name: Connection
