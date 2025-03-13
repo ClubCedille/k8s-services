@@ -23,12 +23,12 @@ spec:
         #   value: upgrade
         # - name: Upgrade
         #   value: websocket
-        # - name: X-Forwarded-Proto
-        #   value: "%PROTOCOL%"
+        - name: X-Forwarded-Proto
+          value: "%PROTOCOL%"
         - name: X-Forwarded-Ip
           value: "%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%"
         # - name: X-Forwarded-Host
         #   value: "%REQ(Host)%"
     services:
     - name: authentik-server
-      port: 80
+      port: 443
