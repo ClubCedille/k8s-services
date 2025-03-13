@@ -21,8 +21,8 @@ spec:
           value: "%REQ(X-Forwarded-For)%"
         - name: X-Forwarded-Proto
           value: "%REQ(:scheme)%"
-        - name: Host
-          value: "%REQ(:AUTHORITY)%"
+        # - name: Host
+        #   value: "%REQ(:AUTHORITY)%"
     services:
     - name: authentik-server
       port: 80
