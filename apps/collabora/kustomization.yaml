@@ -1,0 +1,32 @@
+namespace: ocis
+
+helmCharts:
+  - name: collabora-online
+    releaseName: collabora-online
+    namespace: ocis
+    repo: https://collaboraonline.github.io/online
+    version: 1.1.35
+    valuesInline:
+      collabora:
+        server_name: collabora.svc.cedille.club
+        extra_params: --o:ssl.enable=false --o:ssl.termination=true --o:net.frame_ancestors=ocis.svc.cedille.club
+        aliasgroups:
+          - host: "collaboration-collabora.ocis.svc.cluster.local"
+        existingSecret:
+          enabled: true
+          secretName: collabora-admin
+        proofKeysSecretRef: wopi-proofkey
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-prod
+          ingress.kubernetes.io/force-ssl-redirect: "true"
+        hosts:
+          - host: collabora.svc.cedille.club
+            paths:
+              - path: /
+                pathType: ImplementationSpecific
+        tls:
+          - secretName: collabora-tls
+            hosts:
+              - collabora.svc.cedille.club

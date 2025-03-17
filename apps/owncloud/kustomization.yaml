@@ -1,0 +1,131 @@
+namespace: ocis
+
+helmGlobals:
+  chartHome: ./ocis-charts/charts
+helmCharts:
+  - name: tika
+    releaseName: tika
+    repo: https://apache.jfrog.io/artifactory/tika
+    namespace: ocis
+    version: 2.9.0-full
+  - name: ocis
+    releaseName: ocis
+    namespace: ocis
+    version: 0.7.0
+    valuesInline:
+      logging:
+        level: debug
+        pretty: true
+      externalDomain: ocis.svc.cedille.club
+      http:
+        csp:
+          directives:
+            defaultSrc:
+              - "'self'"
+            connectSrc:
+              - "'self'"
+              - "https://authentik.svc.cedille.club/application/o/ocis-web/.well-known/openid-configuration"
+              - "https://authentik.svc.cedille.club/application/o/token/"
+      insecure:
+        oidcIdpInsecure: true
+        ocisHttpApiInsecure: true
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-staging
+          ingress.kubernetes.io/force-ssl-redirect: "true"
+        tls:
+          - secretName: ocis-tls
+            hosts:
+              - ocis.svc.cedille.club
+      services:
+        search:
+          extractor:
+            type: tika
+            tika:
+              url: http://tika.ocis.svc.cluster.local:9998
+        idm:
+          persistence:
+            enabled: true
+        nats:
+          persistence:
+            enabled: true
+
+        storagesystem:
+          persistence:
+            enabled: true
+
+        storageusers:
+          persistence:
+            enabled: true
+
+        thumbnails:
+          persistence:
+            enabled: true
+
+        web:
+          persistence:
+            enabled: true
+          config:
+            oidc:
+              webClientID: PS0n59r3iCnfFX3rPN1ad2TrDuEKoqkQ6hkJ7rb5
+      features:
+        appsIntegration:
+          enabled: true
+          wopiIntegration:
+            officeSuites:
+              - name: Collabora
+                product: Collabora
+                enabled: true
+                uri: "https://collabora.svc.cedille.club"
+                insecure: false
+                disableProof: false
+                iconURI: https://collabora.svc.cedille.club/favicon.ico
+                ingress:
+                  enabled: false
+        externalUserManagement:
+          enabled: true
+          autoprovisionAccounts:
+            enabled: true
+            claimEmail: email
+            claimDisplayname: name
+            claimGroups: groups
+            claimUserName: preferred_username
+          adminUUID: "akadmin"
+          oidc:
+            issuerURI: https://authentik.svc.cedille.club/application/o/ocis-web/
+            userIDClaim: preferred_username
+            userIDClaimAttributeMapping: username
+            accessTokenVerifyMethod: jwt
+            roleAssignment:
+              enabled: true
+              claim: groups
+              mapping:
+                - role_name: admin
+                  claim_value: ocisAdmin
+          ldap:
+            uri: ldap://ak-outpost-ocis-ldap.authentik.svc.cluster.local
+            insecure: true
+            bindDN: cn=ocis,ou=users,dc=ldap,dc=goauthentik,dc=io
+            writeable: false
+            useServerUUID: true
+            refintEnabled: true
+            user:
+              schema:
+                id: uid
+                mail: mail
+                displayName: displayname
+                userName: cn
+              baseDN: ou=users,dc=ldap,dc=goauthentik,dc=io
+              objectClass: user
+            group:
+              schema:
+                id: uid
+                mail: mail
+                displayName: cn
+                groupName: cn
+                member: member
+              baseDN: ou=virtual-groups,dc=ldap,dc=goauthentik,dc=io
+              objectClass: group
+      secretRefs:
+        ldapSecretRef: "ldap-bind-secrets"
