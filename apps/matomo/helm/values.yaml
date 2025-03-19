@@ -1,7 +1,5 @@
 replicaCount: 1
-matomoUsername: user
 
-matomoPassword: "root"
 persistence:
   enabled: true
   storageClass: "cephfs"
