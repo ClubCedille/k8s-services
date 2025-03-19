@@ -42,4 +42,3 @@ matomo:
   domain: "matomo.svc.cedille.club"
   service:
     type: ClusterIP
- 
