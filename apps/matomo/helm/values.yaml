@@ -1,5 +1,7 @@
 replicaCount: 1
+matomoUsername: user
 
+matomoPassword: "root"
 persistence:
   enabled: true
   storageClass: "cephfs"
@@ -40,3 +42,4 @@ matomo:
   domain: "matomo.svc.cedille.club"
   service:
     type: ClusterIP
+ 
